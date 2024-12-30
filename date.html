@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date sans séparateurs</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: black; /* Fond noir */
+      color: white; /* Texte en blanc pour contraster */
+    }
+
+    .odometer-container {
+      font-size: 20em;
+      display: flex;
+      gap: 5px;
+    }
+
+    .odometer, #year {
+      font-weight: 900; /* Roboto Black */
+    }
+  </style>
+</head>
+<body>
+  <div class="odometer-container">
+    <span id="day" class="odometer">00</span>/
+    <span id="month" class="odometer">00</span>/
+    <span id="year">0000</span> <!-- Pas de classe "odometer" mais appliqué le style directement -->
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+  <script>
+    // Modifier explicitement le comportement de formatage pour les jours et les mois seulement
+    window.odometerOptions = {
+      format: 'd', // Suppression des séparateurs de milliers
+    };
+
+    function updateDate() {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0'); // Jour
+      const month = String(now.getMonth() + 1).padStart(2, '0'); // Mois
+      const year = now.getFullYear(); // Année
+
+      // Mise à jour des valeurs
+      document.getElementById('day').innerHTML = day;
+      document.getElementById('month').innerHTML = month;
+      document.getElementById('year').innerHTML = year; // Mise à jour directe pour l'année
+    }
+
+    // Appeler la fonction au chargement
+    updateDate();
+  </script>
+</body>
+</html>
